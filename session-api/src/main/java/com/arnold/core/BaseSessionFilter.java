@@ -6,7 +6,6 @@ import com.arnold.util.WebUtil;
 import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.html.HTMLParagraphElement;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-public abstract class SessionFilter implements Filter {
-    private final static Logger log = LoggerFactory.getLogger(SessionFilter.class);
+public abstract class BaseSessionFilter implements Filter {
+    private final static Logger log = LoggerFactory.getLogger(BaseSessionFilter.class);
 
     protected final static String SESSION_COOKIE_NAME = "sessionCookieName";
 

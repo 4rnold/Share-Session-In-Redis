@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+        <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+            <property name="maxTotal" value="#{redisConfiguration['MAX_ACTIVE']}" />
+            <property name="maxIdle" value="#{redisConfiguration['MAX_IDLE']}" />
+            <property name="testOnBorrow" value="#{redisConfiguration['TEST_ON_BORROW']}" />
+            <property name="testOnReturn" value="#{redisConfiguration['TEST_ON_RETURN']}" />
+            <property name="testWhileIdle" value="#{redisConfiguration['TEST_WHILE_IDLE']}" />
+        </bean>
+
+        <bean id="jedis.shardInfoCache1" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="#{redisConfiguration['REDIS_IP']}" />
+            <constructor-arg index="1"  type="int" value="#{redisConfiguration['REDIS_PORT_1']}" />
+        </bean>
+        <bean id="jedis.shardInfoCache2" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="#{redisConfiguration['REDIS_IP']}" />
+            <constructor-arg index="1"  type="int" value="#{redisConfiguration['REDIS_PORT_2']}" />
+        </bean>
+        <bean id="jedis.shardInfoCache3" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="#{redisConfiguration['REDIS_IP']}" />
+            <constructor-arg index="1"  type="int" value="#{redisConfiguration['REDIS_PORT_3']}" />
+        </bean>
+        <bean id="jedis.shardInfoCache4" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="#{redisConfiguration['REDIS_IP']}" />
+            <constructor-arg index="1"  type="int" value="#{redisConfiguration['REDIS_PORT_4']}" />
+        </bean>
+        <bean id="jedis.shardInfoCache5" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="#{redisConfiguration['REDIS_IP']}" />
+            <constructor-arg index="1"  type="int" value="#{redisConfiguration['REDIS_PORT_5']}" />
+        </bean>
+        <bean id="jedis.shardInfoCache6" class="redis.clients.jedis.JedisShardInfo">
+            <constructor-arg index="0" value="#{redisConfiguration['REDIS_IP']}" />
+            <constructor-arg index="1"  type="int" value="#{redisConfiguration['REDIS_PORT_6']}" />
+        </bean>
+
+        <bean id="shardedJedisPoolCache" class="redis.clients.jedis.ShardedJedisPool">
+            <constructor-arg index="0" ref="jedisPoolConfig" />
+            <constructor-arg index="1">
+                <list>
+                    <ref bean="jedis.shardInfoCache1" />
+                    <ref bean="jedis.shardInfoCache2" />
+                    <ref bean="jedis.shardInfoCache3" />
+                    <ref bean="jedis.shardInfoCache4" />
+                    <ref bean="jedis.shardInfoCache5" />
+                    <ref bean="jedis.shardInfoCache6" />
+                </list>
+            </constructor-arg>
+        </bean>
+
+        <bean id="redisCache" class="com.soshare.common.RedisUtil">
+            <property name="shardedJedisPool" ref="shardedJedisPoolCache" />
+        </bean>  -->
+
+
+    <!--<bean id="jedisCluster" class="com.lihang.training.redis.JedisClusterFactory">-->
+    <!--<property name="addressConfig">-->
+    <!--<value>classpath:redis/redis.properties</value>-->
+    <!--</property>-->
+    <!--<property name="addressKeyPrefix" value="address" />   &lt;!&ndash;  属性文件里  key的前缀 &ndash;&gt;-->
+    <!--<property name="timeout" value="300000" />-->
+    <!--<property name="maxRedirections" value="6" />-->
+    <!--<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />-->
+    <!--</bean>-->
+
+
+    <!--session share test-->
+    <context:property-placeholder location="classpath:redisV2/redis.properties" />
+
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="200" />
+        <property name="maxTotal" value="1024" />
+        <property name="timeBetweenEvictionRunsMillis" value="10000" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+
+    <bean id="jedisConnFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:hostName="10.0.0.2" p:port="6379"  p:poolConfig-ref="poolConfig"/>
+
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">-->
+    <!--<property name="connectionFactory" ref="jedisConnFactory" />-->
+    <!--</bean>-->
+    <!-- redis template definition -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connectionFactory-ref="jedisConnFactory" />
+
+
+
+    <!--<bean id="springSession" class="org.springframework.session.web.http.SessionRepositoryFilter">-->
+    <!--<constructor-arg>-->
+    <!--<bean class="org.springframework.session.data.redis.RedisOperationsSessionRepository">-->
+    <!--<constructor-arg ref="jedisConnFactory">-->
+    <!--</constructor-arg>-->
+    <!--</bean>-->
+    <!--</constructor-arg>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
+    <!--<bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
+    <!--<property name="hostName" value="192.168.31.166" />-->
+    <!--<property name="password" value="" />-->
+    <!--<property name="port" value="1000" />-->
+    <!--<property name="database" value="10" />-->
+    <!--</bean>-->
+</beans>

@@ -3,7 +3,7 @@ package com.arnold.core;
 import com.arnold.api.Serializer;
 import com.arnold.api.SessionIdGenerator;
 import com.arnold.api.SessionManager;
-import com.arnold.util.PropertiesReader;
+import com.arnold.util.AbstractPropertiesReader;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public abstract class AbstractSessionManager implements SessionManager{
         this(DEFAULT_PROPERTIES);
     }
     public AbstractSessionManager(String propertiesFile) throws IOException {
-        Properties props = PropertiesReader.read(propertiesFile);
+        Properties props = AbstractPropertiesReader.read(propertiesFile);
 
         //初始化组件
         initSessionIdGenerator(props);

@@ -83,6 +83,7 @@ public class RedisSessionManager extends AbstractSessionManager {
         final String sid = sessionPrefix + ":" + id;
         try {
             return this.executor.execute(new RedisCallback<Map<String, Object>>() {
+                @Override
                 public Map<String, Object> execute(Jedis jedis) {
                     String session = jedis.get(sid);
                     if (!Strings.isNullOrEmpty(session)) {
@@ -102,6 +103,7 @@ public class RedisSessionManager extends AbstractSessionManager {
         final String sid = sessionPrefix + ":" + id;
         try {
             this.executor.execute(new RedisCallback<Void>() {
+                @Override
                 public Void execute(Jedis jedis) {
                     jedis.del(sid);
                     return null;
@@ -117,6 +119,7 @@ public class RedisSessionManager extends AbstractSessionManager {
         final String sessionId = sessionPrefix + ":" + sid;
         try {
             this.executor.execute(new RedisCallback<Void>() {
+                @Override
                 public Void execute(Jedis jedis) {
                     jedis.expire(sessionId, maxInactiveInterval);
                     return null;

@@ -178,7 +178,7 @@ public class DistributedSessionHttpSessionWrapper implements HttpSession{
 
     @Override
     public boolean isNew() {
-        return true;
+        return false;
     }
 
 

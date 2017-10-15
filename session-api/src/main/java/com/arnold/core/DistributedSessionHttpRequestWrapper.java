@@ -1,6 +1,7 @@
 package com.arnold.core;
 
 import com.arnold.api.SessionManager;
+import com.arnold.coreV2.ShareSessionHttpServletRequestWrapper;
 import com.arnold.util.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

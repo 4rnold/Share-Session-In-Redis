@@ -2,6 +2,7 @@ package com.arnold.session.redis;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
+import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;

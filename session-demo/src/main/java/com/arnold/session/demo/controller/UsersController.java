@@ -1,5 +1,6 @@
 package com.arnold.session.demo.controller;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/users")
 public class UsersController {
+
 
     private static final String USER_SESSION_ID = "uid";
 

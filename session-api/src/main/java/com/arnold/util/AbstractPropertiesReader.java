@@ -11,7 +11,7 @@ import java.util.Properties;
 /**
  * Properties Reader
  */
-public abstract class PropertiesReader {
+public abstract class AbstractPropertiesReader {
 
     /**
      * read properties from classpath
