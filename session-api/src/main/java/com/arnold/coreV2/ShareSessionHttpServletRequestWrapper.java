@@ -37,6 +37,11 @@ public class ShareSessionHttpServletRequestWrapper extends
         }
     }
 
+    /**
+     * 只是重写关于session的方法
+     * @param create
+     * @return
+     */
     @Override
     public HttpSession getSession(boolean create) {
         if (this.session == null) {

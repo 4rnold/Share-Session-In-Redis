@@ -59,6 +59,7 @@ public class DistributedSessionHttpSessionWrapper implements HttpSession{
         this.createAt = System.currentTimeMillis();
         this.servletContext = servletContext;
         this.sessionManager = sessionManager;
+        //从redis中装载之前的session
         this.sessionStore = sessionManager.loadById(id);
     }
 

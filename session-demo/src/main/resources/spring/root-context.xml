@@ -15,9 +15,26 @@
 
     <import resource="classpath:redisV2/redis.xml" />
 
-    <bean id="sessionService" class="com.arnold.session.redisV2.SessionService"></bean>
+    <!--redis session v2-->
+<!--    <bean id="sessionService" class="com.arnold.session.redisV2.SessionService"></bean>
 
     <bean id="sessionFilter" class="com.arnold.session.redisV2.SessionFilter" P:cookieDomain="session.com">
+    </bean>-->
+
+    <!-- spring-session 将session放入redis -->
+
+    <!-- 设置Cookie domain 和 名称 -->
+    <bean id="defaultCookieSerializer" class="org.springframework.session.web.http.DefaultCookieSerializer">
+        <property name="domainName" value="session.com"/>
+        <property name="cookieName" value="JSESSIONID"/>
+        <property name="cookiePath" value="/"></property>
+        <!-- <property name="domainNamePattern" value="^.+?\.(\w+\.[a-z]+)$"></property>-->
+    </bean>
+
+    <bean id="redisHttpSessionConfiguration"
+          class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <property name="maxInactiveIntervalInSeconds" value="1800" />
+        <property name="cookieSerializer" ref="defaultCookieSerializer"/>
     </bean>
 
 </beans>

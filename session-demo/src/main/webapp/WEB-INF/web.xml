@@ -56,21 +56,30 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>-->
 
-  <filter>
+  <!--redis session v2-->
+<!--  <filter>
     <filter-name>sessionFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     <init-param>
       <param-name>targetFilterLifecycle</param-name>
-      <param-value>true</param-value>  <!-- 默认是false -->
+      <param-value>true</param-value>  &lt;!&ndash; 默认是false &ndash;&gt;
     </init-param>
   </filter>
 
   <filter-mapping>
     <filter-name>sessionFilter</filter-name>
     <url-pattern>/*</url-pattern>
+  </filter-mapping>-->
+
+  <!-- spring-session delegatingFilterProxy -->
+  <filter>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
-
-
 
 
   <servlet>
